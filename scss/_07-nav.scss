@@ -1,0 +1,127 @@
+
+@import '02-variables';
+
+nav  {
+  align-items: flex-end;
+  color: $blk;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin-bottom: .75em;
+  z-index: 10;
+}
+
+nav .nav-items a {
+  color: $blk;
+}
+
+nav .nav-items a:hover {
+  color: $h-link;
+}
+
+.nav-items {
+  align-items: flex-end;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: .5em 0 .1875em 0;
+  z-index: 2;
+}
+
+//  The container <div> - needed to position the dropdown content
+// .dropdown {
+//   display: block;
+// //  font-family: $font-logo;
+//   font-size: 1.1rem;
+//   font-weight: 500;
+//   margin-top: 3.75em;
+//   position: relative;
+//   width: 2em;
+//   }
+
+//  Dropdown Content (Hidden by Default)
+.dropdown-content {
+  display: none;
+  position: relative;
+  top: 1.25em;
+  max-height: 0;
+  width: 16em;
+  z-index: 1;
+}
+
+.nav-open {
+  animation-delay: -.23s;
+  animation-duration: .4s;
+  animation-name: menuDropdown;
+  display: block;
+  height: auto;
+  transform-style: preserve-3d;
+  width: 16em;
+  z-index: 1;
+}
+
+.menu-item {
+  top: 0;
+  left: 0;
+}
+.open-menu-item {
+  animation-duration: .4s;
+  animation-name: menuDropdown;
+  transform-origin: top;
+  transform-style: preserve-3d;
+}
+
+.dropbtn {
+  width: 3.5em;
+}
+
+//  Links inside the dropdown
+.dropdown-content a {
+  background-color: $wht;
+  border-bottom: solid 1px #999;
+  border-left: solid 1px #999;
+  box-shadow: 4px 4px 6px $lt-gray-shado;
+  color: red;
+  display: block;
+  line-height: 3;
+  margin-left: -.0625em;
+  padding-left: 1.25em;
+  text-decoration: none;
+}
+
+.dropdown-content a:first-child {
+  border-top: none;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: solid 1px #999;
+  border-radius: 0 0 .625em 0;
+}
+
+//  Change color of dropdown links on hover
+.dropdown-content a:hover,
+.dropdown-content a:focus {
+  background-color: $red-ltgray;
+}
+
+.dropdown-content a.menu-item:active {
+  background-color: $h-link;
+  color: #fff;
+  outline: none;
+}
+
+// .dropdown-content a[href="#"]:hover,
+// .dropdown-content a[href="#"]:focus {
+//   background-color: $wht;
+//   cursor: default;
+// }
+
+@keyframes menuDropdown {
+  from {
+//    opacity: 0;
+      transform: rotateX(-90deg);
+  } to {
+//    opacity: 1;
+    transform: rotateX(0deg);
+  }
+}
+

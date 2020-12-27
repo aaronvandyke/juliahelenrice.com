@@ -1,0 +1,115 @@
+# mod-deflate.c includes additions from https://gist.github.com/Zodiac1978/3145830
+
+# Additional sources (from above, and if needed):
+# http://stackoverflow.com/questions/7704624/how-can-i-use-gzip-compression-for-css-and-js-files-on-my-websites
+# http://codex.wordpress.org/Output_Compression
+# http://www.perun.net/2009/06/06/wordpress-websites-beschleuinigen-4-ein-zwischenergebnis/#comment-61086
+# http://www.smashingmagazine.com/smashing-book-1/performance-optimization-for-websites-part-2-of-2/
+# http://gtmetrix.com/configure-entity-tags-etags.html
+# http://de.slideshare.net/walterebert/die-htaccessrichtignutzenwchh2014
+# http://de.slideshare.net/walterebert/mehr-performance-fr-wordpress
+# https://andreashecht-blog.de/4183/
+
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# This example completely removes the file extension from your URL.
+# So, example.php would appear as example
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /.*index\ HTTP/
+RewriteRule ^(.*)index$ https://www.juliahelenrice.com/$1 [L,R=301]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([^/]+)/$ https://www.juliahelenrice.com/$1 [L,R=301]
+
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(.+)\.php\ HTTP/
+RewriteRule ^(.+)\.php$ https://www.juliahelenrice.com/$1 [L,R=301]
+RewriteRule ^([0-9a-zA-Z-_]+)$ /$1.php [L]
+# RewriteRule ^([a-z]+)$ /$1.php [L]
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE application/atom+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/js
+AddOutputFilterByType DEFLATE application/json
+AddOutputFilterByType DEFLATE application/ld+json
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+AddOutputFilterByType DEFLATE application/x-font
+AddOutputFilterByType DEFLATE application/x-font-opentype
+AddOutputFilterByType DEFLATE application/x-font-otf
+AddOutputFilterByType DEFLATE application/x-font-truetype
+AddOutputFilterByType DEFLATE application/x-font-ttf
+AddOutputFilterByType DEFLATE application/x-httpd-fastphp
+AddOutputFilterByType DEFLATE application/x-httpd-php
+AddOutputFilterByType DEFLATE application/x-javascript
+AddOutputFilterByType DEFLATE application/x-web-app-manifest+json
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE font/opentype
+AddOutputFilterByType DEFLATE font/otf
+AddOutputFilterByType DEFLATE font/ttf
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/javascript
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/vtt
+AddOutputFilterByType DEFLATE text/x-component
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE image/svg+xml
+AddOutputFilterByType DEFLATE image/x-icon
+
+# For Olders Browsers Which Can't Handle Compression
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4.0[678] no-gzip
+BrowserMatch MSIE !no-gzip !gzip-only-text/html
+</IfModule>
+
+# Make sure proxies don't deliver the wrong content
+<IfModule mod_headers.c>
+Header append Vary User-Agent env=!dont-vary
+</IfModule>
+
+# Extra Security Headers (From: https://htaccessbook.com/increase-security-x-security-headers/)
+<IfModule mod_headers.c>
+	Header set X-XSS-Protection "1; mode=block"
+	Header always append X-Frame-Options SAMEORIGIN
+	Header set X-Content-Type-Options nosniff
+</IfModule>
+
+
+# Browser caching
+# One year for most static assets
+# Two month for images
+<ifModule mod_headers.c>
+<filesMatch ".(css|js|ico)$">
+	Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
+<filesMatch ".(jpg|jpeg|png|gif|svg|woff2|woff)$">
+	Header set Cache-Control "max-age=5256000, public"
+</filesMatch>
+<filesMatch "\\.(html|htm|php)$">
+Header set Cache-Control "max-age=0, no-cache, private, must-revalidate"
+Header set Pragma "no-cache"
+</filesMatch>
+</ifModule>
+# END Caching
+
+# This redirects browsers that experience a 404 error (Not Found) (and others listed)
+# to the file "error.php" located in the same directory as your .htaccess file.
+ErrorDocument 400 /error.html
+ErrorDocument 401 /error.html
+ErrorDocument 403 /error.html
+ErrorDocument 404 /error.html
+ErrorDocument 500 /error.html
+
+
+# Denying access to "hidden" files
+RedirectMatch 403 /\..*$
+
+
+# Denying access to a directory listing
+Options -Indexes
+
+# Only allow cookies to be sent securely. (Owasp)
+Header always edit Set-Cookie (.*) "$1; HTTPOnly; Secure"

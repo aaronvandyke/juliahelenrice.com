@@ -1,0 +1,48 @@
+
+$blk: #000;
+$wht: #fff;
+$dk-gray: #666;
+$gray: #999;
+$lt-gray: #ccc;
+$ltr-gray: #ddd;
+$ltst-gray: #f6f6f6;
+$lt-gray-shado: rgba(204, 204, 204, .4);
+$md-gray-shado: rgba(153, 153, 153, .4);
+$dk-gray-shado: rgba(102, 102, 102, .4);
+$grn-ltgray: #d0ddd0;
+$red-ltgray: #fcfaf9;
+$dkblu: #36c;
+$grn-bright: #1afc66;
+
+$link: #204a8a;
+$v-link: #8a2020;
+$h-link: #009050;
+$a-link: #3AA46B;
+
+$focus-color: #666;
+
+
+
+
+
+
+
+$h-font: 'Open Sans', sans-serif;
+
+$bdy-font: 'IBM Plex Serif', serif;
+
+$hr-color: $ltst-gray;
+$hrb-color: $gray;
+
+$dropdown-item-color: $ltst-gray;
+
+$body-font-size: clamp(13px, 1.67vw, 17px);
+$h1-color: $dk-gray;
+
+$h3-size: 1.25rem;
+$h4-size: 1rem;
+
+// font-family: 'Open Sans', sans-serif;
+
+$trans-grey-75: rgba(0, 0, 0, .75);
+$trans-grey-85: rgba(0, 0, 0, .85);
