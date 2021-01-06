@@ -25,11 +25,11 @@ const closeButton = document.getElementById('carousel-button-close');
 // let targetImage = "";
 let targetIndex = 0;
 
-// ***** Set event listeners on all <a> images. ***** //
+// ***** Set event listeners on all of my figures. ***** //
 for(let i = 0; i < articleImages.length; i++) {
   articleImages[i].addEventListener('click', e => {
     e.preventDefault();
-    let targetImage = e.target.closest('a');
+    let targetImage = e.target.closest('figure');
 
 //  Do nothing on click outside of targets.
     if (!targetImage) return;
@@ -37,7 +37,7 @@ for(let i = 0; i < articleImages.length; i++) {
     document.body.style.height = "100%";
 
     carouselOverlay.style.display = "grid";
-    // Finds the index of the image that gets clicked.
+    // Finds the index of the figure that gets clicked.
     targetIndex = slides.findIndex(index => index === targetImage);
     // Get 'current' figcaption texts
     let captionCurrent = caption[targetIndex].innerHTML;

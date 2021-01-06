@@ -49,13 +49,38 @@ i {
 
 .footnote {
   font-size: .92em;
+  margin-top: 1.84em;
   overflow-wrap: break-word;
   word-break: break-word;
   word-wrap: break-word;
 }
 
+dl {
+  display: flex;
+  flex-wrap: wrap;
+  line-height: 1.33;
+}
+
+dl.footnote dt,
+dl.footnote dd {
+  font-family: $bdy-font;
+  font-size: .9375rem;
+}
+
+dt {
+text-align: right;
+width: 3ch;
+}
+
+dd {
+  margin: 0 0 .46em .325em;
+  text-align: left;
+  width: calc(100% - 5ch - .5em);
+}
+
 sup {
   font-size: .75rem;
+  line-height: 100%;
   vertical-align: .33rem;
 }
 
@@ -199,15 +224,17 @@ a:active {
 
 
 img.legend {
-  margin-top: -1em;
+  margin-top: -2em;
   max-width: 12em;
 }
 
 hr.bod {
-  margin: 2em 0 1em 0;
+  margin: 2em 0 2em 0;
 }
 
-figcaption {
+figcaption,
+details,
+details p {
   font-family: $h-font;
   font-size: .80rem;
   line-height: 1.33;
@@ -216,7 +243,7 @@ figcaption {
 }
 
 footer {
-  color: $dk-gray;
+  color: $dk-dk-gray;
   display: flex;
   font-size: .9rem;
   justify-content: space-between;
@@ -225,12 +252,14 @@ footer {
   width: 100%;
 }
 
-footer dt {
+p.copyright {
   text-align: left;
+  width: 40%;
 }
 
-footer dd {
+p.resides {
   text-align: right;
+  width: 40%;
 }
 
 @supports (grid-area: auto) {
@@ -355,6 +384,10 @@ footer dd {
 
     aside {
       justify-self: end;
+    }
+
+    aside:first-of-type {
+      margin-top: .875em;
     }
 
    .v-rule {
