@@ -242,6 +242,16 @@ details p {
   max-width: 64ch;
 }
 
+.bibliography > summary,
+.bibliography p {
+  line-height: 1.41;
+  margin-bottom: .5em;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  word-wrap: break-word;
+
+}
+
 footer {
   color: $dk-dk-gray;
   display: flex;
