@@ -20,7 +20,7 @@
     <header>
 
       <nav>
-        <h1>&#8239;Julia Helen Rice</h1>
+        <h1><a href="index.html">&#8239;Julia Helen Rice</a></h1>
 
         <ul class="nav-items">
           <li class="dropbtn" id="navbtn" title="click for navigation menu">
@@ -35,7 +35,7 @@
           </li>
 
           <li class="nav-item"><a class="nav-link" href="#">CV</a></li>
-          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
         </ul>
       </nav>
       <hr>
@@ -45,12 +45,29 @@
     <main class="index-main">
       <article>
         <div class="v-rule">
-          <h2></h2>
+          <h2>Contact:</h2>
 
-          <p>
-            Julia Helen Rice is an artist and designer based in Minneapolis, Minnesota. She is currently pursing her
-            Masters of Landscape Architecture at Harvard University’s Graduate School of Design.
-          </p>
+          <p class="elink">Email: <a class="dlnk" href="#" data-p1="juliahe" data-p2="lenrice"
+            data-p3="gma" data-p4="il.com">Email me</a></p>
+
+            <!-- juliahelenrice@gmail.com -->
+
+          <script type="text/javascript">
+
+            var elinks = document.getElementsByClassName('dlnk');
+            var total_elinks = elinks.length;
+            for( var i=0; i < total_elinks; i++ ){
+              var part1 = elinks[i].getAttribute('data-p1');
+              var part2 = elinks[i].getAttribute('data-p2');
+              var part3 = elinks[i].getAttribute('data-p3');
+              var part4 = elinks[i].getAttribute('data-p4');
+              var newData = part1+part2+'@'+part3+part4;
+              elinks[i].setAttribute('href','mailto:'+newData);
+              elinks[i].innerHTML = newData;
+            }
+    
+          </script>
+    
 
           <hr class="bod">
         </div>

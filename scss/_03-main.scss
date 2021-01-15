@@ -249,7 +249,6 @@ details p {
   overflow-wrap: break-word;
   word-break: break-word;
   word-wrap: break-word;
-
 }
 
 footer {
@@ -398,6 +397,10 @@ p.resides {
 
     aside:first-of-type {
       margin-top: .875em;
+    }
+
+    .index-main aside:first-of-type {
+      margin-top: -.1875em;
     }
 
    .v-rule {
