@@ -242,6 +242,10 @@ details p {
   max-width: 64ch;
 }
 
+details {
+  line-height: 1.5;
+}
+
 .bibliography > summary,
 .bibliography p {
   line-height: 1.41;

@@ -1,7 +1,16 @@
-
 @import '02-variables';
 
-nav  {
+// .preload {
+//   // animation-duration: 0s !important;
+//   // animation-name: menuDropdown;
+
+//   .dropdown-content {
+//     visibility: hidden;
+//     display: none;
+//     }
+// }
+
+nav {
   align-items: flex-end;
   color: $blk;
   flex-wrap: nowrap;
@@ -40,20 +49,23 @@ nav .nav-items a:hover {
 
 //  Dropdown Content (Hidden by Default)
 .dropdown-content {
-  display: none;
+  animation-duration: .25s;
+  animation-name: menuUp;
+}
+
+.nav-toggle {
   position: relative;
   top: 1.25em;
   max-height: 0;
+//  opacity: 0;
   width: 16em;
   z-index: 1;
 }
 
 .nav-open {
-  animation-delay: -.23s;
-  animation-duration: .4s;
+//  animation-delay: -.13s;
+  animation-duration: .25s;
   animation-name: menuDropdown;
-  display: block;
-  height: auto;
   transform-style: preserve-3d;
   width: 16em;
   z-index: 1;
@@ -62,11 +74,29 @@ nav .nav-items a:hover {
 .menu-item {
   top: 0;
   left: 0;
+  opacity: 0;
+  pointer-events: none;
 }
-.open-menu-item {
-  animation-duration: .4s;
-  animation-name: menuDropdown;
+
+.menu-item-postLoad {
+  animation-duration: .25s;
+  animation-name: menuUp;
   transform-origin: top;
+  transform-style: preserve-3d;
+  transition-duration: .25s;
+}
+
+.menu-item-postLoad-toggle {
+  pointer-events: unset;
+}
+
+.open-menu-item {
+  animation-duration: .25s;
+  animation-name: menuDropdown;
+//  height: auto;
+  opacity: 1;
+  transition-duration: .25s;
+//  transform-origin: top;
   transform-style: preserve-3d;
 }
 
@@ -117,11 +147,24 @@ nav .nav-items a:hover {
 
 @keyframes menuDropdown {
   from {
-//    opacity: 0;
-      transform: rotateX(-90deg);
-  } to {
-//    opacity: 1;
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+
+  to {
+    opacity: 1;
     transform: rotateX(0deg);
   }
 }
 
+@keyframes menuUp {
+  from {
+    opacity: 1;
+    transform: rotateX(0deg);
+  }
+
+  to {
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+}
